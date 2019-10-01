@@ -1,13 +1,16 @@
-bitcoin-mainnet:
-  build: .
-  volumes:
-    - ./data:/root/.bitcoin:rw
-  ports:
-    - "8332:8332"
-    - "8333:8333"
-  environment:
-    - BITCOIN_CORE_VERSION=0.18.1
-    - BITCOIN_RPCUSER=yamalabo
-    - BITCOIN_RPCPASS=yozoranomukou
-    - BITCOIN_DIR=/root/.bitcoin
-    - BITCOIN_CONF=${BITCOIN_DIR}/bitcoin.conf
+version: "3"
+
+services:
+  btc-testnet:
+    build: .
+    volumes:
+      - ~/docker-volume/btc_testnet_data:/root/.bitcoin:rw
+    ports:
+      - "18332:18332"
+      - "18333:18333"
+    environment:
+      - BITCOIN_CORE_VERSION=0.18.1
+      - BITCOIN_RPCUSER=yamalabo
+      - BITCOIN_RPCPASS=yozoranomukou
+      - BITCOIN_DIR=/root/.bitcoin
+      - BITCOIN_CONF=${BITCOIN_DIR}/bitcoin.conf

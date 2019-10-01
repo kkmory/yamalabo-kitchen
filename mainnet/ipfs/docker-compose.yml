@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  ipfs-mainnet:
+    image: ipfs/go-ipfs:latest
+    hostname: ipfs_mainnet_host
+    volumes:
+    - "~/docker-volume/ipfs_export:/export"
+    - "~/docker-volume/ipfs:/data/ipfs"
+    ports:
+    - "5001:5001"
+    - "4001:4001"
+    - "8080:8080"

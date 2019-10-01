@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  btc-mainnet:
+    build:
+      context: .
+      args: 
+        - BITCOIN_CORE_VERSION=0.18.1
+        - BITCOIN_DIR=/root/.bitcoin
+        - BITCOIN_CONF=/root/.bitcoin/bitcoin.conf
+        - DOWNLOAD_URL=https://bitcoin.org/bin/bitcoin-core-0.18.1/bitcoin-0.18.1-x86_64-linux-gnu.tar.gz
+    volumes:
+      - ~/docker-volume/btc_mainnet_data:/root/.bitcoin:rw
+    ports:
+      - "8332:8332"
+      - "8333:8333"
+      - "18332:18332"
+      - "18333:18333"
+    environment:
+      - BITCOIN_DIR=/root/.bitcoin
+      - BITCOIN_CONF=/root/.bitcoin/bitcoin.conf
+      - BITCOIN_RPCUSER=${YAMALABO_NODE_USER}
+      - BITCOIN_RPCPASS=${YAMALABO_NODE_PASS}

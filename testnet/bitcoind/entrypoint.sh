@@ -2,15 +2,11 @@
 
 set -euo pipefail
 
-BITCOIN_DIR=/root/.bitcoin
-BITCOIN_CONF=${BITCOIN_DIR}/bitcoin.conf
-
 # If config doesn't exist, initialize with sane defaults for running a
 # non-mining node.
 
 if [ ! -e "${BITCOIN_CONF}" ]; then
   tee -a >${BITCOIN_CONF} <<EOF
-testnet=3
 txindex=1  
 server=1   
 rest=1      

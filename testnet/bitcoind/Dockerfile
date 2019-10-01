@@ -1,10 +1,9 @@
 FROM alpine
 
-ARG VERSION=0.17.1
 ARG GLIBC_VERSION=2.29-r0
 
-ENV FILENAME bitcoin-${VERSION}-x86_64-linux-gnu.tar.gz
-ENV DOWNLOAD_URL https://bitcoin.org/bin/bitcoin-core-${VERSION}/${FILENAME}
+ENV FILENAME bitcoin-${BITCOIN_CORE_VERSION}-x86_64-linux-gnu.tar.gz
+ENV DOWNLOAD_URL https://bitcoin.org/bin/bitcoin-core-${BITCOIN_CORE_VERSION}/${FILENAME}
 
 RUN apk update \
   && apk --no-cache add wget tar bash ca-certificates \
@@ -16,16 +15,16 @@ RUN apk update \
   && rm -rf /glibc-${GLIBC_VERSION}.apk \
   && rm -rf /glibc-bin-${GLIBC_VERSION}.apk \
   && wget $DOWNLOAD_URL \
-  && tar xzvf /bitcoin-${VERSION}-x86_64-linux-gnu.tar.gz \
+  && tar xzvf /bitcoin-${BITCOIN_CORE_VERSION}-x86_64-linux-gnu.tar.gz \
   && mkdir /root/.bitcoin \
-  && mv /bitcoin-${VERSION}/bin/* /usr/local/bin/ \
-  && rm -rf /bitcoin-${VERSION}/ \
-  && rm -rf /bitcoin-${VERSION}-x86_64-linux-gnu.tar.gz \
+  && mv /bitcoin-${BITCOIN_CORE_VERSION}/bin/* /usr/local/bin/ \
+  && rm -rf /bitcoin-${BITCOIN_CORE_VERSION}/ \
+  && rm -rf /bitcoin-${BITCOIN_CORE_VERSION}-x86_64-linux-gnu.tar.gz \
   && apk del tar wget ca-certificates
 
 EXPOSE 8332 8333 18332 18333 28332 28333
 
-ADD VERSION .
+ADD BITCOIN_CORE_VERSION .
 ADD ./bin/docker_entrypoint.sh /usr/local/bin/docker_entrypoint.sh
 RUN chmod a+x /usr/local/bin/docker_entrypoint.sh
 

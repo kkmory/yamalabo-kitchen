@@ -3,12 +3,6 @@
 #    Configure Ubuntu
 # ======================
 sudo apt update && sudo apt upgrade -y
-sudo apt install language-pack-ja
-
-sudo update-locale LANG=ja_JP.UTF8
-sudo locale-gen ja_JP.UTF-8
-sudo dpkg-reconfigure -f noninteractive locales
-echo "LANG=ja_JP.UTF-8" | sudo tee /etc/default/locale
 sudo timedatectl set-timezone Asia/Tokyo
 
 sudo fallocate -l 1g /swapfile
